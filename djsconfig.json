@@ -1,7 +1,0 @@
-{
-    "project": "namespace",
-    "format": "JavaScript",
-    "run": {
-        "default": "nodemon"
-    }
-}
