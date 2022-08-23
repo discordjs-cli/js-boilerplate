@@ -19,7 +19,7 @@ const {
 } = require('./config/config.json');
 
 
-const ready = require('./module_exports/ready.js');
+const logready = require('logready');
 const logError = require('./module_exports/error.js');
 
 
