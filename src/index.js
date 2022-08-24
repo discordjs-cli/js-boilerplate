@@ -3,7 +3,7 @@ const { GatewayIntentBits, Client, Collection, ActivityType, Partials } = requir
 const { TOKEN, PREFIX, LOG_CHANNEL, BOT_NAME, ACTIVITY, TYPE, STATUS } = require('./config/config.json');
 
 const logready = require('logready');
-const logError = require('./module_exports/error.js');
+const logError = require('./modules/error.js');
 
 const client = new Client({
     intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
@@ -54,8 +54,7 @@ for (const menuPath of menuDirs) {
 }
 
 client.legacyCommands = new Collection();
-const commandDirs = fs
-    .readdirSync(path.join(__dirname, 'interactions/legacy_commands'))
+const commandDirs = fs.readdirSync(path.join(__dirname, 'interactions/legacy_commands'));
 for (const legacyPath of commandDirs) {
     const legacyFiles = fs
         .readdirSync(__dirname + '/interactions/legacy_commands/' + legacyPath)

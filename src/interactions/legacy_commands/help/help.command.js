@@ -5,7 +5,7 @@ module.exports = {
     name: "help",
     description: "Help command",
     execute(message, args) {
-        let legacyCommands = client.legacyCommands; // Fetches Legacy commands
+        var legacyCommands = client.legacyCommands; // Fetches Legacy commands
 
         const helpEmbed = new EmbedBuilder()
             .setTitle(`${BOT_NAME}'s Legacy Commands`) // Bot name
