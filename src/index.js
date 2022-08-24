@@ -61,7 +61,7 @@ const buttonDirs = fs.readdirSync("interactions/buttons");
 for (const buttonPath of buttonDirs) {
     const buttonFiles =
         fs.readdirSync("interactions/buttons/" + buttonPath)
-            .filter(x => x.endsWith('.js'));
+            .filter(x => x.endsWith('.button.js'));
 
     for (var buttonFile of buttonFiles) {
         const button = require(path.join(__dirname, "interactions/buttons/" + buttonPath + "/" + `${buttonFile}`));
@@ -75,7 +75,7 @@ const menuDirs = fs.readdirSync("interactions/menus");
 for (const menuPath of menuDirs) {
     const menuFiles =
         fs.readdirSync("interactions/menus/" + menuPath)
-            .filter(x => x.endsWith('.js'));
+            .filter(x => x.endsWith('.menu.js'));
 
     for (var menuFile of menuFiles) {
         const menu = require(path.join(__dirname, "interactions/menus/" + menuPath + "/" + `${menuFile}`))
