@@ -49,7 +49,7 @@ for (const slashCommandPath of slashCommandDir) {
         fs.readdirSync("interactions/slash_commands/" + slashCommandPath)
             .filter(x => x.endsWith('.command.js'));
 
-    for (commandFile of commandFiles) {
+    for (var commandFile of commandFiles) {
         const command = require(path.join(__dirname, "interactions/slash_commands/" + slashCommandPath + "/" + `${commandFile}`));
         client.slashCommands.set(command.data.name, command);
     }
@@ -63,7 +63,7 @@ for (const buttonPath of buttonDirs) {
         fs.readdirSync("interactions/buttons/" + buttonPath)
             .filter(x => x.endsWith('.js'));
 
-    for (buttonFile of buttonFiles) {
+    for (var buttonFile of buttonFiles) {
         const button = require(path.join(__dirname, "interactions/buttons/" + buttonPath + "/" + `${buttonFile}`));
         client.buttonHandler.set(button.button_id, button);
     }
@@ -77,7 +77,7 @@ for (const menuPath of menuDirs) {
         fs.readdirSync("interactions/menus/" + menuPath)
             .filter(x => x.endsWith('.js'));
 
-    for (menuFile of menuFiles) {
+    for (var menuFile of menuFiles) {
         const menu = require(path.join(__dirname, "interactions/menus/" + menuPath + "/" + `${menuFile}`))
         client.menuHandler.set(
             `${menu.menu_id}%%${menu.menu_value}`,
@@ -86,14 +86,17 @@ for (const menuPath of menuDirs) {
     }
 };
 
-
 client.legacyCommands = new Collection();
-const commandFiles =
-    fs.readdirSync(path.join(__dirname, "interactions/legacy_commands"))
-        .filter((file) => file.endsWith(".js"));
-for (const file of commandFiles) {
-    const command = require(path.join(__dirname, "interactions/legacy_commands", `${file}`));
-    client.legacyCommands.set(command.name, command);
+const commandDirs = fs.readdirSync("interactions/legacy_commands");
+for (const legacyPath of commandDirs) {
+    const legacyFiles =
+        fs.readdirSync("interactions/legacy_commands/" + legacyPath)
+            .filter(x => x.endsWith('.command.js'));
+
+    for (var legacyFile of legacyFiles) {
+        const command = require(path.join(__dirname, "interactions/legacy_commands/" + legacyPath + "/" + `${legacyFile}`))
+        client.legacyCommands.set(command.name, command);
+    }
 };
 
 
@@ -182,7 +185,7 @@ client.on('messageCreate', message => {
 
     if (!message.content.startsWith(PREFIX)) return;
 
-    let args = message.content.slice(PREFIX.length).split(' ');
+    var args = message.content.slice(PREFIX.length).split(' ');
     const commandName = args.shift().toLowerCase();
 
 
