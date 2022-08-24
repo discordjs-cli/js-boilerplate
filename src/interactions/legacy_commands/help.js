@@ -4,7 +4,7 @@ const { BOT_NAME, PREFIX } = require('../../config/config.json');
 module.exports = {
     name: "help",
     description: "Help command",
-    execute(client, message, args) {
+    execute(message, args) {
         let legacyCommands = client.legacyCommands; // Fetches Legacy commands
 
         const helpEmbed = new EmbedBuilder()

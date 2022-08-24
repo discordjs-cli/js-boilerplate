@@ -3,7 +3,7 @@ const { ActionRowBuilder, SelectMenuBuilder } = require('discord.js');
 module.exports = {
 	name: "menu2",
 	description: "Menu command",
-	execute(client, message, args) {
+	execute(message, args) {
 		// Menu 2
 		const menu = new ActionRowBuilder()
 			.addComponents(

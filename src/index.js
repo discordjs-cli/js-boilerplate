@@ -193,7 +193,7 @@ client.on('messageCreate', message => {
     if (!command) return;
 
     try {
-        command.execute(client, message, args);
+        command.execute(message, args);
     } catch (error) {
         console.log(error);
 

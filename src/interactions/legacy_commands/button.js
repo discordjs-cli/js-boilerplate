@@ -3,7 +3,7 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 module.exports = {
     name: "button",
     description: "Get a button",
-    execute(client, message, args) {
+    execute(message, args) {
         const button = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
