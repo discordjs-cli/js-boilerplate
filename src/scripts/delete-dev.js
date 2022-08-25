@@ -3,9 +3,14 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord.js');
 const { CLIENT_ID, DEV_GUILD_ID, TOKEN } = require('../config/config.json');
 
-async function main() {
+async function deleteDev() {
     if (CLIENT_ID === '') {
         console.log('ERROR: Client ID unavailable. Please provide a valid client ID in ./config/config.json');
+        process.exit();
+    }
+
+    if (DEV_GUILD_ID === '') {
+        console.log('ERROR: No guild ID provided. Please provide a valid guild ID in ./config/config.json');
         process.exit();
     }
 
@@ -13,8 +18,8 @@ async function main() {
 
     await rest
         .put(Routes.applicationGuildCommands(CLIENT_ID, DEV_GUILD_ID), { body: [] })
-        .then(() => console.log('Successfully deleted all guild commands.'))
+        .then(() => console.log('Successfully deleted dev application commands.'))
         .catch(console.error);
 }
 
-main();
+deleteDev();

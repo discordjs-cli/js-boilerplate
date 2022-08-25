@@ -5,9 +5,14 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord.js');
 const { CLIENT_ID, DEV_GUILD_ID, TOKEN } = require('../config/config.json');
 
-async function main() {
+async function deployDev() {
     if (CLIENT_ID === '') {
         console.log('ERROR: Client ID unavailable. Please provide a valid client ID in ./config/config.json');
+        process.exit();
+    }
+
+    if (DEV_GUILD_ID === '') {
+        console.log('ERROR: No guild ID provided. Please provide a valid guild ID in ./config/config.json');
         process.exit();
     }
 
@@ -19,15 +24,10 @@ async function main() {
 
     const slashCommandDir = fs.readdirSync(currentDir + '/interactions/slash_commands/');
     for (const slashCommandPath of slashCommandDir) {
-        const commandFiles = fs
-            .readdirSync(currentDir + '/interactions/slash_commands/' + slashCommandPath)
-            .filter((x) => x.endsWith('.command.js'));
+        const commandFiles = fs.readdirSync(currentDir + '/interactions/slash_commands/' + slashCommandPath).filter((x) => x.endsWith('.command.js'));
 
         for (var commandFile of commandFiles) {
-            const command = require(path.join(
-                currentDir,
-                '/interactions/slash_commands/' + slashCommandPath + '/' + `${commandFile}`
-            ));
+            const command = require(path.join(currentDir, '/interactions/slash_commands/' + slashCommandPath + '/' + `${commandFile}`));
             commands.push(command.data.toJSON());
         }
     }
@@ -39,4 +39,4 @@ async function main() {
         .catch(console.error);
 }
 
-main();
+deployDev();
