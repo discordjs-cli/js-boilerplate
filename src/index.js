@@ -27,7 +27,7 @@ for (const slashCommandPath of slashCommandDir) {
         ));
         client.slashCommands.set(command.data.name, command);
     }
-}
+};
 
 client.buttonHandler = new Collection();
 const buttonDirs = fs.readdirSync(__dirname + '/interactions/buttons');
@@ -40,18 +40,30 @@ for (const buttonPath of buttonDirs) {
         const button = require(path.join(__dirname, 'interactions/buttons/' + buttonPath + '/' + `${buttonFile}`));
         client.buttonHandler.set(button.button_id, button);
     }
-}
+};
 
 client.menuHandler = new Collection();
 const menuDirs = fs.readdirSync(__dirname + '/interactions/menus');
 for (const menuPath of menuDirs) {
-    const menuFiles = fs.readdirSync(__dirname + '/interactions/menus/' + menuPath).filter((x) => x.endsWith('.menu.js'));
+    const menuFiles =
+        fs.readdirSync(__dirname + '/interactions/menus/' + menuPath)
+            .filter((x) => x.endsWith('.menu.js'));
 
     for (var menuFile of menuFiles) {
         const menu = require(path.join(__dirname, 'interactions/menus/' + menuPath + '/' + `${menuFile}`));
         client.menuHandler.set(`${menu.menu_id}%%${menu.menu_value}`, menu);
     }
-}
+};
+
+// Modal Handler
+client.modalHandler = new Collection();
+const modalFiles =
+    fs.readdirSync(path.join(__dirname, "interactions/modals"))
+        .filter((file) => file.endsWith(".modal.js"));
+for (const file of modalFiles) {
+    const modal = require(path.join(__dirname, "interactions/modals", `${file}`));
+    client.modalHandler.set(modal.id, modal);
+};
 
 client.legacyCommands = new Collection();
 const commandDirs = fs.readdirSync(path.join(__dirname, 'interactions/legacy_commands'));
@@ -64,7 +76,7 @@ for (const legacyPath of commandDirs) {
         const command = require(path.join(__dirname, '/interactions/legacy_commands/' + legacyPath + '/' + `${legacyFile}`));
         client.legacyCommands.set(command.name, command);
     }
-}
+};
 
 client.on('interactionCreate', async (interaction) => {
     if (interaction.isChatInputCommand()) {
