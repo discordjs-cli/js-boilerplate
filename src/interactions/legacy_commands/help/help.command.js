@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require('discord.js');
-const { BOT_NAME, PREFIX } = require('../../../config/config.json');
+const { BOT_NAME, PREFIX } = require('../../../config/config.js');
 
 module.exports = {
     name: "help",

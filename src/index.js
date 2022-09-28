@@ -1,6 +1,6 @@
 const { GatewayIntentBits, Client, Collection, ActivityType, Partials } = require('discord.js');
 
-const { TOKEN, PREFIX, LOG_CHANNEL, BOT_NAME, ACTIVITY, TYPE, STATUS } = require('./config/config.json');
+const { TOKEN, PREFIX, LOG_CHANNEL, BOT_NAME, ACTIVITY, TYPE, STATUS } = require('./config/config.js');
 
 const logready = require('logready');
 const logError = require('./modules/error.js');
@@ -56,14 +56,14 @@ for (const menuPath of menuDirs) {
 };
 
 // Modal Handler
-client.modalHandler = new Collection();
-const modalFiles =
-    fs.readdirSync(path.join(__dirname, "interactions/modals"))
-        .filter((file) => file.endsWith(".modal.js"));
-for (const file of modalFiles) {
-    const modal = require(path.join(__dirname, "interactions/modals", `${file}`));
-    client.modalHandler.set(modal.id, modal);
-};
+// client.modalHandler = new Collection();
+// const modalFiles =
+//     fs.readdirSync(path.join(__dirname, "interactions/modals"))
+//         .filter((file) => file.endsWith(".modal.js"));
+// for (const file of modalFiles) {
+//     const modal = require(path.join(__dirname, "interactions/modals", `${file}`));
+//     client.modalHandler.set(modal.id, modal);
+// };
 
 client.legacyCommands = new Collection();
 const commandDirs = fs.readdirSync(path.join(__dirname, 'interactions/legacy_commands'));

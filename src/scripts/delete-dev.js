@@ -1,16 +1,16 @@
 // Deletes guild commands
 const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord.js');
-const { CLIENT_ID, DEV_GUILD_ID, TOKEN } = require('../config/config.json');
+const { CLIENT_ID, DEV_GUILD_ID, TOKEN } = require('../config/config.js');
 
 async function deleteDev() {
     if (CLIENT_ID === '') {
-        console.log('ERROR: Client ID unavailable. Please provide a valid client ID in ./config/config.json');
+        console.log('ERROR: Client ID unavailable. Please provide a valid client ID in ./config/config.js');
         process.exit();
     }
 
     if (DEV_GUILD_ID === '') {
-        console.log('ERROR: No guild ID provided. Please provide a valid guild ID in ./config/config.json');
+        console.log('ERROR: No guild ID provided. Please provide a valid guild ID in ./config/config.js');
         process.exit();
     }
 
